@@ -1,0 +1,3 @@
+[submodule "BasketballReservationApp"]
+	path = BasketballReservationApp
+	url = https://github.com/yhs2/BasketballReservationApp.git
