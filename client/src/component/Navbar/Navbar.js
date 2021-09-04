@@ -1,19 +1,21 @@
 import React, {useState, useEffect} from 'react';
-import {  AppBar, Typography, Toolbar, Avatar, Button} from '@material-ui/core';
+import {  AppBar, Typography, Toolbar, Avatar, Button, IconButton, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import useStyles from './style';
 import infinity from '../../image/infinity.jpg'
 import { useDispatch } from "react-redux";
 import { LOGOUT } from '../../constants/actionType';
 import decode from 'jwt-decode'
-
-
+import MenuIcon from '@material-ui/icons/Menu';
+import MailIcon from '@material-ui/icons/Mail';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
 const Navbar = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
     const [user,setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+    const [open, setOpen] = useState(false);
     useEffect(() => {
         const token = user?.token;
         if(token){
@@ -32,8 +34,28 @@ const Navbar = () => {
         history.push('/');
         setUser(null);
     }
+
+    const handleLeftNav = () => {
+        setOpen((prev) => !prev)
+    }
     return(
+        // app bar gives styling such as color and shape, tool bar gives structure
         <AppBar className={classes.appBar}  position="static" color="inherit">
+             
+            <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleLeftNav}>
+                < MenuIcon />
+             </IconButton>
+            {open && 
+            (
+                <List>
+                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                        <ListItem button key={text}>
+                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemText primary={text} />
+                        </ListItem>
+                    ))}
+                </List>
+            )}
             <div className={classes.brandContainer}>
                 {/* component props turns desinated typography compoenent into a desired compoenent
                     Now the typography is <Link>....</Link>  with varient(the font size) of h2*/}

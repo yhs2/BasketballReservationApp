@@ -25,6 +25,7 @@ const App = () => {
         <BrowserRouter>
             <Container maxWidth="xl">
                 <Navbar/>
+                
                 {/* Switch Between these Routers(like a switch statement) */}
                 {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
