@@ -5,7 +5,7 @@ import Navbar from './component/Navbar/Navbar';
 import Home from './component/Home/Home'
 import Auth from './component/Auth/Auth'
 import PostDetails from "./component/PostDetails/PostDetails";
-
+import Location from "./component/Location/Location"
 // Enable navigations through interfaces
 import { BrowserRouter, Switch, Route, Redirect, useHistory } from "react-router-dom";
 
@@ -31,6 +31,7 @@ const App = () => {
                 renders the first one that matches the current URL. */}
                 <Switch>
                     <Route path="/" exact component={() => <Redirect to="/posts" />} />
+                    <Route path="/locations" exact component={Location} />
                     <Route path="/posts" exact component={Home}/>
                     <Route path="/posts/search" exact component={Home}/>
                     <Route path="/posts/:id" exact component={PostDetails}/>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button} from '@material-ui/core'
 import { getPosts, getPostsBySearch } from "../../actions/posts";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import Leftnav from "../leftNav/leftNav";
 import { useHistory, useLocation } from "react-router-dom";
 import ChipInput from 'material-ui-chip-input'
 
@@ -43,7 +43,7 @@ const Home = () => {
 
     const [searchText,setSearchText] = useState("");
     const [tags,setTags] = useState([]);
-
+    const open = useSelector((state) => state.posts.isOpen);
     const changeSearchText = (e) => {
         setSearchText(e.target.value)
         console.log(searchText);
@@ -74,6 +74,8 @@ const Home = () => {
             history.push('/');
         }
     }
+
+    
     
     // UseEffect hook allows user to simplifies the side effects(change in other content) in components by making 
     // it much easier to run side effect when props/state changes, so we would avoid unnacassary state change. 
@@ -85,10 +87,18 @@ const Home = () => {
         <Grow in>
             <Container maxWidth="xl">
                 <Grid container justifyContent="space-between" alignItems="stretch" spacing={3} direction="row" className={classes.gridContainer}>
-                    <Grid item xs={12} sm={6} md={9}>
+                    {open && 
+                        <Grid item xs={12} sm={4} md={2}>
+                            <Paper className={classes.leftNav} elevation={3}>
+                                <Leftnav />
+                            </Paper>
+                            
+                        </Grid>
+                    }
+                    <Grid item xs={12} sm={open ? 4 : 6} md={open ? 7 : 8}>
                         <Posts setCurrentId={setCurrentId}/>
                     </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
+                    <Grid item xs={12} sm={open ? 4 : 6} md={open ? 3 : 4}>
                         <AppBar className={classes.appBarSearch} position="static" color="inherit">
                             <TextField name="search" variant="outlined" label="Search Memories" fullWidth value="TEXT" value={searchText} onChange={changeSearchText} onKeyPress={handleKeyPress}/>
                             <ChipInput

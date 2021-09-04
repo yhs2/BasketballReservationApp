@@ -14,3 +14,6 @@ export const LOGIN = "LOGIN";
 export const SIGNUP = "SIGNUP";
 export const FETCH_BY_SEARCH = "FETCH_BY_SEARCH";
 export const FETCH_POST = "FETCH_POST";
+
+export const OPEN = "OPEN"
+export const CLOSE = "CLOSE"
