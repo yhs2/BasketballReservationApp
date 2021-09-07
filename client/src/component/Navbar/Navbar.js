@@ -3,11 +3,11 @@ import {  AppBar, Typography, Toolbar, Avatar, Button, IconButton, List, ListIte
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import useStyles from './style';
 import infinity from '../../image/infinity.jpg'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LOGOUT,OPEN, CLOSE } from '../../constants/actionType';
 import decode from 'jwt-decode'
 import MenuIcon from '@material-ui/icons/Menu';
-
+import clsx from 'clsx';
 const Navbar = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -15,6 +15,7 @@ const Navbar = () => {
     const location = useLocation();
     const [user,setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     const [open, setOpen] = useState(false);
+    const openLeft = useSelector((state) => state.posts.isOpen);
     useEffect(() => {
         const token = user?.token;
         if(token){
@@ -48,7 +49,7 @@ const Navbar = () => {
     }
     return(
         // app bar gives styling such as color and shape, tool bar gives structure
-        <AppBar className={classes.appBar}  position="static" color="inherit">
+        <AppBar  position="static" color="inherit" className={clsx(classes.appBar, {[classes.shrink] : openLeft})}>
              
             <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleLeftNav}>
                 < MenuIcon />

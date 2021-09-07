@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+const drawerWidth = 240
 export default makeStyles((theme) => ({
   appBarSearch: {
     borderRadius: 4,
@@ -17,7 +18,19 @@ export default makeStyles((theme) => ({
       flexDirection: 'column-reverse',
     },
   },
-  leftNav: {
-    height: "100%"
+  expand: {
+    marginLeft : 0,
+    width : '100%',
+    transition : theme.transitions.create(['margin-left','width'], {
+      duration : theme.transitions.duration.leavingScreen
+    })
+  },
+  shrink: {
+    marginLeft : drawerWidth,
+    width : `calc(100% - ${drawerWidth}px)`,
+    transition : theme.transitions.create(['margin-left','width'], {
+      duration : theme.transitions.duration.enteringScreen
+    }),
+    
   }
 }));

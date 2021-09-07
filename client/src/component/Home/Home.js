@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Leftnav from "../leftNav/leftNav";
 import { useHistory, useLocation } from "react-router-dom";
 import ChipInput from 'material-ui-chip-input'
-
+import clsx from 'clsx';
 
 import useStyles from "./style";
 import Posts from '../Posts/Posts';
@@ -84,21 +84,21 @@ const Home = () => {
     //     dispatch(getPosts());
     // },[currentId,dispatch]);
     return(
-        <Grow in>
-            <Container maxWidth="xl">
+        
+            <Container maxWidth="xl" className={clsx(classes.expand, {[classes.shrink] : open})}>
                 <Grid container justifyContent="space-between" alignItems="stretch" spacing={3} direction="row" className={classes.gridContainer}>
-                    {open && 
+                    {/* {open && 
                         <Grid item xs={12} sm={4} md={2}>
                             <Paper className={classes.leftNav} elevation={3}>
                                 <Leftnav />
                             </Paper>
                             
                         </Grid>
-                    }
-                    <Grid item xs={12} sm={open ? 4 : 6} md={open ? 7 : 8}>
+                    } */}
+                    <Grid item xs={12} sm={6} md={8}>
                         <Posts setCurrentId={setCurrentId}/>
                     </Grid>
-                    <Grid item xs={12} sm={open ? 4 : 6} md={open ? 3 : 4}>
+                    <Grid item xs={12} sm={6} md={4}>
                         <AppBar className={classes.appBarSearch} position="static" color="inherit">
                             <TextField name="search" variant="outlined" label="Search Memories" fullWidth value="TEXT" value={searchText} onChange={changeSearchText} onKeyPress={handleKeyPress}/>
                             <ChipInput
@@ -118,7 +118,7 @@ const Home = () => {
                     </Grid>
                 </Grid>
             </Container>
-        </Grow>
+        
     )
 }
 

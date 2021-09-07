@@ -1,16 +1,33 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { deepPurple } from '@material-ui/core/colors';
+import transitions from '@material-ui/core/styles/transitions';
 
+const drawerWidth = 240
 export default makeStyles((theme) => ({
   appBar: {
-    borderRadius: 15,
-    margin: '30px 0',
+    marginTop: '30px',
+    marginBottom : '30px',
+    marginRight : 0,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '10px 50px',
+    marginLeft : 0,
+    width : '100%',
+    transition : theme.transitions.create(['margin-left','width'], {
+      duration : theme.transitions.duration.leavingScreen
+    })
   },
+  shrink: {
+    marginLeft : drawerWidth,
+    width : `calc(100% - ${drawerWidth}px)`,
+    transition : theme.transitions.create(['margin-left','width'], {
+      duration : theme.transitions.duration.enteringScreen
+    }),
+    
+  }
+  ,
   heading: {
     color: 'rgba(0,183,255, 1)',
     textDecoration: 'none',

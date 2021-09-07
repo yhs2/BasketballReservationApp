@@ -8,7 +8,7 @@ import PostDetails from "./component/PostDetails/PostDetails";
 import Location from "./component/Location/Location"
 // Enable navigations through interfaces
 import { BrowserRouter, Switch, Route, Redirect, useHistory } from "react-router-dom";
-
+import Leftnav from "./component/leftNav/leftNav";
 
 
 // The middle to dispatch actions
@@ -23,9 +23,10 @@ const App = () => {
     return (
         
         <BrowserRouter>
+            
+            <Navbar/>
             <Container maxWidth="xl">
-                <Navbar/>
-                
+                <Leftnav />
                 {/* Switch Between these Routers(like a switch statement) */}
                 {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
@@ -38,6 +39,7 @@ const App = () => {
                     <Route path="/auth" exact component={() => ( user !== null ? <Redirect to="/posts" /> : <Auth />)} />
                 </Switch>
             </Container>
+            
         </BrowserRouter>
         
     )
