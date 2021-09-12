@@ -31,3 +31,5 @@ export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 
 export const signIn = (signInForm) => API.post('/user/signIn',signInForm);
 export const signUp = (signUpForm) => API.post('/user/signUp',signUpForm);
+
+export const createLocation = (newLocation) => API.post('/location', newLocation); 

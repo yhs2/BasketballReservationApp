@@ -17,3 +17,5 @@ export const FETCH_POST = "FETCH_POST";
 
 export const OPEN = "OPEN"
 export const CLOSE = "CLOSE"
+
+export const CREATELOCATION = "CREATELOCATION"

@@ -14,8 +14,9 @@ export const getLocations = async (req,res) => {
 
 export const createLocations = async (req,res) => {
     
-    const location = req.body;
-    const newLocation = new PostMessage({...post, creator: req.userId, createdAt: new Date().toISOString()})
+    const {location,maximumCapacity,notes,courtImage,addressType,addressLine,City,Province,Zip,Country} = req.body;
+    console.log(location);
+    const newLocation = new location({location,maximumCapacity,notes,courtImage, creator: req.userId, dateCreated: new Date().toISOString()})
     try {
         await newPost.save();
         res.status(201).json(newPost);

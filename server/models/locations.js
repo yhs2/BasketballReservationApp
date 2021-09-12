@@ -1,4 +1,4 @@
-import mongoose, { mongo } from 'mongoose'
+import mongoose from 'mongoose'
 
 const locationSchema = mongoose.Schema({
     location : String,
@@ -11,9 +11,16 @@ const locationSchema = mongoose.Schema({
         type : Date,
         default : new Date()
     },
-    note : String,
-    address : String,
-    courtImage : string
+    notes : String,
+    address : {
+        addressType : { type : String },
+        addressLine : { type : String },
+        City : { type : String },
+        Province : { type : String },
+        Country : { type : String },
+        Zip : { type : String },
+    },
+    courtImage : String
 })
 
 const location = mongoose.model('location',locationSchema);
