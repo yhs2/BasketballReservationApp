@@ -1,4 +1,4 @@
-import location from "../models/locations.js";
+import Location from "../models/locations.js";
 import mongoose from 'mongoose';
 export const getLocations = async (req,res) => {
     try {
@@ -12,14 +12,30 @@ export const getLocations = async (req,res) => {
     
 }
 
+
 export const createLocations = async (req,res) => {
     
     const {location,maximumCapacity,notes,courtImage,addressType,addressLine,City,Province,Zip,Country} = req.body;
-    console.log(location);
-    const newLocation = new location({location,maximumCapacity,notes,courtImage, creator: req.userId, dateCreated: new Date().toISOString()})
+    console.log(req.body);
+    
+    const newLocation = new Location({
+        location,
+        maximumCapacity,
+        notes,
+        courtImage, 
+        creator: req.userId, 
+        dateCreated: new Date().toISOString(), 
+        address : {
+            addressType,
+            addressLine,
+            City,
+            Province,
+            Country,
+            Zip
+        }})
     try {
-        await newPost.save();
-        res.status(201).json(newPost);
+        await newLocation.save();
+        res.status(201).json(newLocation);
     } catch (error) {
         res.status(409).json({message: error.message});
     }

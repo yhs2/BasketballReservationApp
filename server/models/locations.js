@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import address from './address.js';
+
 
 const locationSchema = mongoose.Schema({
     location : String,
@@ -13,12 +15,8 @@ const locationSchema = mongoose.Schema({
     },
     notes : String,
     address : {
-        addressType : { type : String },
-        addressLine : { type : String },
-        City : { type : String },
-        Province : { type : String },
-        Country : { type : String },
-        Zip : { type : String },
+        type : address,
+        default : {}
     },
     courtImage : String
 })
