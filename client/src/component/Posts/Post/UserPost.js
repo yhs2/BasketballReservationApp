@@ -28,18 +28,17 @@ const UserPost = ({ post, setCurrentId }) => {
     }
     return(
         <Card className={classes.card}>
+            <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
+            <div className={classes.overlay}>
+                <Typography variant="h6">{post.name}</Typography>
+                <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+            </div>
+            <div className={classes.overlay2} style={{zIndex : '999'}}>
+                <Button style={{ color: 'white', zIndex : '999' }} size="small" onClick={() => setCurrentId(post._id)} disabled={(post.creator === user?.result?._id || post.creator === user?.result?.googleId) ? false : true}>
+                    {(post.creator === user?.result?._id || post.creator === user?.result?.googleId) && <MoreHorizIcon fontSize="medium" />}
+                </Button>
+            </div>
             <ButtonBase component="span" className={classes.cardAction} onClick={cardDetails}>
-                <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
-                <div className={classes.overlay}>
-                    <Typography variant="h6">{post.name}</Typography>
-                    <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
-                </div>
-                <div className={classes.overlay2}>
-                    <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)} disabled={(post.creator === user?.result?._id || post.creator === user?.result?.googleId) ? false : true}>
-                        {(post.creator === user?.result?._id || post.creator === user?.result?.googleId) && <MoreHorizIcon fontSize="medium" />}
-                    </Button>
-                </div>
-
                 <div className={classes.details}>
                     <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `# ${tag} `)}</Typography>
                 </div>

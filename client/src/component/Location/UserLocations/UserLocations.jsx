@@ -1,16 +1,29 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import { Grid, CircularProgress} from '@material-ui/core';
 import useStyles  from "./style";
 import UserLocation from './UserLocation/UserLocation';
-const UserLocations = ({setCurrentId}) => {
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchLocation } from '../../../actions/location';
+const UserLocations = () => {
+    const locations = useSelector((state) => state?.location.post)
+    console.log(locations);
     const classes = useStyles();
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchLocation())
+        
+    }, [dispatch])
     
     return (
         
-        <Grid className={classes.Locations} container spacing = {1}>
-            <UserLocation />
-            <UserLocation />
+        <Grid  className={classes.Locations} container spacing = {1}>
+            {locations.map((location) => (
+                <Grid key={location._id}>
+                    <UserLocation post={location}/>
+                </Grid>
+                
+                
+            ))}
         </Grid>
         
     )

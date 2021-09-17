@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import address from './address.js';
 
 
 const locationSchema = mongoose.Schema({
@@ -14,10 +13,12 @@ const locationSchema = mongoose.Schema({
         default : new Date()
     },
     notes : String,
-    address : {
-        type : address,
-        default : {}
-    },
+    addressType : String,
+    addressLine : String,
+    City : String ,
+    Province : String ,
+    Country : String ,
+    Zip : String,
     courtImage : String
 })
 

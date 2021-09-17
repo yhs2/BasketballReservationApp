@@ -33,3 +33,4 @@ export const signIn = (signInForm) => API.post('/user/signIn',signInForm);
 export const signUp = (signUpForm) => API.post('/user/signUp',signUpForm);
 
 export const createLocation = (newLocation) => API.post('/location', newLocation); 
+export const fetchLocation = () => API.get('/location');

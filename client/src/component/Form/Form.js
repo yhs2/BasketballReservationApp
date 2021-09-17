@@ -12,7 +12,7 @@ import { createPost, updatePost } from '../../actions/posts';
 
 // Destructure with in the round brackets
 const Form = ({currentId,setCurrentId}) => {
-    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);// return undefined if not find
+    const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId) : null);// return undefined if not find
     const user = JSON.parse(localStorage.getItem('profile'))
     const[postData,setPostData] = useState({
             title: '',

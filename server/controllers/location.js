@@ -3,8 +3,7 @@ import mongoose from 'mongoose';
 export const getLocations = async (req,res) => {
     try {
 
-        const locations = await PostMessage.find();
-        // console.log(postMessages);
+        const locations = await Location.find();
         res.status(200).json(locations); 
     } catch (error) {
         res.status(404).json({message: error.message})
@@ -16,7 +15,6 @@ export const getLocations = async (req,res) => {
 export const createLocations = async (req,res) => {
     
     const {location,maximumCapacity,notes,courtImage,addressType,addressLine,City,Province,Zip,Country} = req.body;
-    console.log(req.body);
     
     const newLocation = new Location({
         location,
@@ -25,14 +23,13 @@ export const createLocations = async (req,res) => {
         courtImage, 
         creator: req.userId, 
         dateCreated: new Date().toISOString(), 
-        address : {
-            addressType,
-            addressLine,
-            City,
-            Province,
-            Country,
-            Zip
-        }})
+        addressType,
+        addressLine,
+        City,
+        Province,
+        Country,
+        Zip
+        })
     try {
         await newLocation.save();
         res.status(201).json(newLocation);
