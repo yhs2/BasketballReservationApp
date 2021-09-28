@@ -15,11 +15,7 @@ import Leftnav from "./component/leftNav/leftNav";
 
 
 const App = () => {
-    const [user,setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-    useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem("profile")))
-    }, user)
-    console.log(user);
+    const user = JSON.parse(localStorage.getItem("profile"));
     return (
         
         <BrowserRouter>
@@ -36,7 +32,7 @@ const App = () => {
                     <Route path="/posts" exact component={Home}/>
                     <Route path="/posts/search" exact component={Home}/>
                     <Route path="/posts/:id" exact component={PostDetails}/>
-                    <Route path="/auth" exact component={() => ( user !== null ? <Redirect to="/posts" /> : <Auth />)} />
+                    <Route path="/auth" exact component={Auth} />
                 </Switch>
             </Container>
             

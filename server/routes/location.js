@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 
-router.post('/',createLocations);
+router.post('/', auth, createLocations);
 router.get('/',getLocations);
 // Upon any router bellow initiate, we first check on the auth middleware for the authorization check
 // then if it identifies the identity, we continue to the application middleware(the controller)

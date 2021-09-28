@@ -33,8 +33,8 @@ const Navbar = () => {
         dispatch({
             type: LOGOUT
         });
-        history.push('/');
         setUser(null);
+        history.push('/');
     }
 
     const handleLeftNav = () => {
@@ -58,12 +58,12 @@ const Navbar = () => {
                 {/* component props turns desinated typography compoenent into a desired compoenent
                     Now the typography is <Link>....</Link>  with varient(the font size) of h2*/}
                 <Typography component={Link} to="/" className={classes.heading}  varient ="h2" align="center">
-                    Memories
+                    Basketball reserves
                 </Typography>
                 <img className={classes.image} src={infinity} alt="Image" height="400"/>
             </div>
             <Toolbar>
-                {user ? 
+                {user != null ? 
                 (
                 <div className ={classes.toolbar}>
                     <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}> {user.result.name.charAt(0)} </Avatar>

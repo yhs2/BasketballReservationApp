@@ -1,10 +1,18 @@
 import React from 'react'
-import { Box, Card, CardContent, CardMedia,Typography  } from '@material-ui/core'
+import { Box, Card, CardContent, CardMedia,Typography,Button  } from '@material-ui/core'
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import useStyles from './style'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { ADMIN, SETLOCATION } from '../../../../constants/actionType'
+
 const UserLocation = ({post}) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
+    const handleUpdateClick = () => {
+        dispatch({ type: SETLOCATION, payload: post._id })
+    }
     return (
         <Card className={classes.CardContent}>
             <Box>
@@ -34,7 +42,13 @@ const UserLocation = ({post}) => {
                         <Typography style={{position : 'inline-block', marginLeft : "1rem"}} color = 'primary' variant = "subtitle2" component ="span">
                             {post.Country}
                         </Typography>
-                    </Typography>
+                    </Typography>   
+                    
+                    <div className={classes.overlay2} onClick={handleUpdateClick}>
+                        <Button size="small" >
+                            {(post.creator == ADMIN) && <MoreHorizIcon fontSize="medium" />}
+                        </Button>
+                    </div>
                 </CardContent>
             </Box>
             

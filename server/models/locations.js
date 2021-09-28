@@ -19,7 +19,8 @@ const locationSchema = mongoose.Schema({
     Province : String ,
     Country : String ,
     Zip : String,
-    courtImage : String
+    courtImage : String,
+    creator: String
 })
 
 const location = mongoose.model('location',locationSchema);

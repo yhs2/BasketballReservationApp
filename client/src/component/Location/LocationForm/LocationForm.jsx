@@ -7,6 +7,8 @@ import { postLocation } from '../../../actions/location';
 
 const LocationForm = () => {
     const dispatch = useDispatch()
+    const classes = useStyles()
+    const updateLocation = useSelector(state => state.location.formLocation);
     const [location,setLocation] = useState({
         location : '',
         maximumCapacity: 0,
@@ -19,7 +21,7 @@ const LocationForm = () => {
         courtImage: '',
         Country : ''
     })
-
+    
     const handleChange = (event) => {
         const { name, value} = event.target;
         setLocation({
@@ -34,10 +36,11 @@ const LocationForm = () => {
         dispatch(postLocation({...location}))
     }
     return (
-        <Paper>
+        
             <form autoComplete="off" noValidate onSubmit={handleLocationSubmit}>
                 <Typography variant="h6"> Submit location </Typography>
                 <TextField 
+                    className={classes.textField}
                     name="location" 
                     variant="outlined" 
                     label="Title" 
@@ -46,6 +49,7 @@ const LocationForm = () => {
                     onChange={handleChange}
                 />
                 <TextField 
+                    className={classes.textField}
                     name="maximumCapacity" 
                     variant="outlined" 
                     label="maximumCapacity" 
@@ -54,6 +58,7 @@ const LocationForm = () => {
                     onChange={handleChange}
                 />
                 <TextField 
+                    className={classes.textField}
                     name="notes" 
                     variant="outlined" 
                     label="notes" 
@@ -62,6 +67,7 @@ const LocationForm = () => {
                     onChange={handleChange}
                 />
                 <TextField 
+                    className={classes.textField}
                     name="addressType" 
                     variant="outlined" 
                     label="addressType" 
@@ -70,6 +76,7 @@ const LocationForm = () => {
                     onChange={handleChange}
                 />
                 <TextField 
+                    className={classes.textField}
                     name="addressLine" 
                     variant="outlined" 
                     label="addressLine" 
@@ -78,6 +85,7 @@ const LocationForm = () => {
                     onChange={handleChange}
                 />
                 <TextField 
+                    className={classes.textField}
                     name="City" 
                     variant="outlined" 
                     label="City" 
@@ -86,6 +94,7 @@ const LocationForm = () => {
                     onChange={handleChange}
                 />
                 <TextField 
+                    className={classes.textField}
                     name="Province" 
                     variant="outlined" 
                     label="Province" 
@@ -94,6 +103,7 @@ const LocationForm = () => {
                     onChange={handleChange}
                 />
                 <TextField 
+                    className={classes.textField}
                     name="Country" 
                     variant="outlined" 
                     label="Country" 
@@ -102,6 +112,7 @@ const LocationForm = () => {
                     onChange={handleChange}
                 />
                 <TextField 
+                    className={classes.textField}
                     name="Zip" 
                     variant="outlined" 
                     label="Zip" 
@@ -123,7 +134,7 @@ const LocationForm = () => {
                 <Button variant="contained" color="primary" size="large" type="submit" fullWidth> Submit </Button>
                 <Button variant="contained" color="secondary" size="small" onClick={()=>{}} fullWidth> Clear </Button>
             </form>
-        </Paper>
+        
     )
 }
 
