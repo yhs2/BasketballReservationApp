@@ -34,3 +34,4 @@ export const signUp = (signUpForm) => API.post('/user/signUp',signUpForm);
 
 export const createLocation = (newLocation) => API.post('/location', newLocation); 
 export const fetchLocation = () => API.get('/location');
+export const updateLocation = (id,updateLocation) => API.patch(`/location/${id}`,updateLocation);

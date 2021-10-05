@@ -3,12 +3,15 @@ import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import useStyles  from "./style";
 import FileBase from 'react-file-base64'
 import { useDispatch, useSelector } from 'react-redux';
-import { postLocation } from '../../../actions/location';
+import { postLocation, updatedLocation } from '../../../actions/location';
+import { SETLOCATION } from '../../../constants/actionType'
 
 const LocationForm = () => {
     const dispatch = useDispatch()
     const classes = useStyles()
-    const updateLocation = useSelector(state => state.location.formLocation);
+    const updateLocationId = useSelector(state => state.location.formLocation);
+    const updateLocation = useSelector(state => state.location.post.find(post => post._id === updateLocationId))
+    console.log(updateLocation);
     const [location,setLocation] = useState({
         location : '',
         maximumCapacity: 0,
@@ -21,6 +24,23 @@ const LocationForm = () => {
         courtImage: '',
         Country : ''
     })
+
+    useEffect(() => {
+        if(updateLocationId){
+            setLocation({
+                location : updateLocation.location,
+                maximumCapacity: updateLocation.maximumCapacity,
+                notes : updateLocation.notes,
+                addressType : updateLocation.addressType,
+                addressLine : updateLocation.addressLine,
+                City : updateLocation.City,
+                Province : updateLocation.Province,
+                Zip : updateLocation.Zip,
+                courtImage: updateLocation.courtImage,
+                Country : updateLocation.Country
+            })
+        }
+    },[updateLocationId])
     
     const handleChange = (event) => {
         const { name, value} = event.target;
@@ -31,11 +51,34 @@ const LocationForm = () => {
         console.log(location);
     }
 
-    const handleLocationSubmit = (event) => {
+    const handleLocationSubmit = async (event) => {
         event.preventDefault();
-        dispatch(postLocation({...location}))
+        if(updateLocationId){
+            dispatch(updatedLocation(updateLocationId , {...location}))
+            clearForm()
+        }
+        else{
+            dispatch(postLocation({...location}))
+            clearForm()
+        }       
     }
-    return (
+
+    const clearForm = () => {
+        setLocation({
+            location : '',
+            maximumCapacity: 0,
+            notes : '',
+            addressType : '',
+            addressLine : '',
+            City : '',
+            Province : '',
+            Zip : '',
+            courtImage: '',
+            Country : ''
+        })
+        dispatch({ type: SETLOCATION, payload: null })
+    }
+        return (
         
             <form autoComplete="off" noValidate onSubmit={handleLocationSubmit}>
                 <Typography variant="h6"> Submit location </Typography>
@@ -132,7 +175,7 @@ const LocationForm = () => {
                     />
                 </div>
                 <Button variant="contained" color="primary" size="large" type="submit" fullWidth> Submit </Button>
-                <Button variant="contained" color="secondary" size="small" onClick={()=>{}} fullWidth> Clear </Button>
+                <Button variant="contained" color="secondary" size="small" onClick={clearForm} fullWidth> Clear </Button>
             </form>
         
     )

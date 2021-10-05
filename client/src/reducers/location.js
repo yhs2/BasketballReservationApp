@@ -1,5 +1,5 @@
 import { bindActionCreators } from "redux";
-import { CREATELOCATION, FETCHLOCATION, SETLOCATION} from "../constants/actionType";
+import { CREATELOCATION, FETCHLOCATION, SETLOCATION, UPDATELOCATION} from "../constants/actionType";
 
 
 const locationReducer = (state = {post : []}, action) => {
@@ -22,9 +22,13 @@ const locationReducer = (state = {post : []}, action) => {
         case SETLOCATION:
             return {
                 ...state,
-                formLocation: state.post.find(post => post._id === action.payload)
+                formLocation: action.payload
             }
-
+        case UPDATELOCATION:
+            return {
+                ...state,
+                post : state.post.map((post) => post._id === action.payload ? action.payload : post)
+            }
         default:
             return state;
     }
