@@ -1,5 +1,5 @@
 import * as api from "../api";
-import { CREATELOCATION, FETCHLOCATION, UPDATELOCATION } from "../constants/actionType";
+import { CREATELOCATION, FETCHLOCATION, UPDATELOCATION, DELETELOCATION } from "../constants/actionType";
 export const postLocation = (location) => async (dispatch) => {
     try {
         const { data } = await api.createLocation(location);
@@ -33,6 +33,20 @@ export const updatedLocation = (id,location) => async (dispatch) => {
             type: UPDATELOCATION,
             payload: data
         })
+        dispatch(fetchLocation())
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const deleteLocation = (id) => async (dispatch) => {
+    try {
+        await api.deleteLocation(id);
+        dispatch({ 
+            type: DELETELOCATION, 
+            payload: id
+        })
+        dispatch(fetchLocation())
     } catch (error) {
         console.log(error);
     }

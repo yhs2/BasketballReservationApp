@@ -3,7 +3,7 @@ import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import useStyles  from "./style";
 import FileBase from 'react-file-base64'
 import { useDispatch, useSelector } from 'react-redux';
-import { postLocation, updatedLocation } from '../../../actions/location';
+import { postLocation, updatedLocation, fetchLocation } from '../../../actions/location';
 import { SETLOCATION } from '../../../constants/actionType'
 
 const LocationForm = () => {
@@ -11,7 +11,6 @@ const LocationForm = () => {
     const classes = useStyles()
     const updateLocationId = useSelector(state => state.location.formLocation);
     const updateLocation = useSelector(state => state.location.post.find(post => post._id === updateLocationId))
-    console.log(updateLocation);
     const [location,setLocation] = useState({
         location : '',
         maximumCapacity: 0,
@@ -48,7 +47,6 @@ const LocationForm = () => {
             ...location,
             [name] : value
         })
-        console.log(location);
     }
 
     const handleLocationSubmit = async (event) => {
@@ -81,7 +79,7 @@ const LocationForm = () => {
         return (
         
             <form autoComplete="off" noValidate onSubmit={handleLocationSubmit}>
-                <Typography variant="h6"> Submit location </Typography>
+                <Typography variant="h6"> {updateLocationId ? 'Update Location' : 'Submit location'} </Typography>
                 <TextField 
                     className={classes.textField}
                     name="location" 
@@ -174,7 +172,7 @@ const LocationForm = () => {
                         })}
                     />
                 </div>
-                <Button variant="contained" color="primary" size="large" type="submit" fullWidth> Submit </Button>
+                <Button variant="contained" color="primary" size="large" type="submit" fullWidth>{updateLocationId ? 'Update' : 'Submit'} </Button>
                 <Button variant="contained" color="secondary" size="small" onClick={clearForm} fullWidth> Clear </Button>
             </form>
         

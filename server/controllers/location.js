@@ -54,3 +54,21 @@ export const updateLocation = async (req,res) => {
     
     res.json(updatedPost);
 }
+
+
+
+export const deleteLocation = async (req,res) => {
+    
+    const { id: _id } = req.params;
+    if(!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).send("No post with dat ID");
+
+    }
+    
+    // new: true to recieve the updated version of post from database
+    const deletePost = await Location.findByIdAndRemove(_id)
+    
+    
+    
+    res.json("deleted");
+}

@@ -5,11 +5,14 @@ import UserLocation from "./UserLocations/UserLocation/UserLocation"
 import useStyles from './style'
 import LocationForm from './LocationForm/LocationForm';
 import UserLocations from './UserLocations/UserLocations';
+import clsx from 'clsx';
 const Locations = ({setCurrentId}) => {
+
+    const open = useSelector((state) => state.posts.isOpen);
     // const { locations, isLoading } = useSelector((state) => state.locations);
     const classes = useStyles();
     return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" className={clsx(classes.expand, {[classes.shrink] : open})}>
         <Grid container justifyContent="space-between" alignItems="stretch" spacing={3} direction="row">
             <Grid item xs={12} sm={4} md={8}>
                

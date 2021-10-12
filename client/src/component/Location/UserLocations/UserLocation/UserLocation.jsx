@@ -4,14 +4,21 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import useStyles from './style'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { ADMIN, SETLOCATION } from '../../../../constants/actionType'
+import { ADMIN, SETLOCATION, DELETELOCATION } from '../../../../constants/actionType'
+import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
+import { fetchLocation, deleteLocation } from '../../../../actions/location';
 
 const UserLocation = ({post}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-
+    const admin = localStorage.getItem('profile')['email'];
+    console.log(admin);
     const handleUpdateClick = () => {
         dispatch({ type: SETLOCATION, payload: post._id })
+    }
+
+    const handleDelete = () => {
+        dispatch(deleteLocation(post._id))
     }
     return (
         <Card className={classes.CardContent}>
@@ -46,7 +53,12 @@ const UserLocation = ({post}) => {
                     
                     <div className={classes.overlay2} onClick={handleUpdateClick}>
                         <Button size="small" >
-                            {(post.creator == ADMIN) && <MoreHorizIcon fontSize="medium" />}
+                            <MoreHorizIcon fontSize="medium" />
+                        </Button>
+                    </div>
+                    <div className={classes.overlay3} onClick={handleDelete}>
+                        <Button size="small" >
+                            <DeleteSweepIcon fontSize="medium" />
                         </Button>
                     </div>
                 </CardContent>

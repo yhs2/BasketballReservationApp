@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchLocation } from '../../../actions/location';
 const UserLocations = () => {
     const locations = useSelector((state) => state?.location.post)
-    console.log(locations);
     const classes = useStyles();
     const dispatch = useDispatch();
     useEffect(() => {

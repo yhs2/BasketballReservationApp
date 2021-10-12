@@ -12,7 +12,6 @@ import axios from 'axios';
 // const API = axios.create({baseURL: 'https://memories-projecttttt.herokuapp.com'})
 const API = axios.create({baseURL: 'http://localhost:5000'})
 API.interceptors.request.use((req)=>{
-    console.log(req);
     if(localStorage.getItem("profile")){
         req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
     }
@@ -35,3 +34,4 @@ export const signUp = (signUpForm) => API.post('/user/signUp',signUpForm);
 export const createLocation = (newLocation) => API.post('/location', newLocation); 
 export const fetchLocation = () => API.get('/location');
 export const updateLocation = (id,updateLocation) => API.patch(`/location/${id}`,updateLocation);
+export const deleteLocation = (id) => API.delete(`location/${id}`)
